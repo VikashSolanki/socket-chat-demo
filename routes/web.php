@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+});
+Route::post('sendmessage', 'chatController@sendMessage');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
